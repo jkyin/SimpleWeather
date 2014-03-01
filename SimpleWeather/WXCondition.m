@@ -14,8 +14,7 @@
 {
     // 创建一个静态的NSDictionary，因为WXCondition的每个实例都将使用相同的数据映射
     static NSDictionary *_imageMap = nil;
-    
-    if (!_imageMap) {
+    if (! _imageMap) {
         // 天气状况与图像文件的关系（例如“01d”代表“weather-clear.png”）
         _imageMap = @{
                       @"01d" : @"weather-clear",
@@ -41,6 +40,12 @@
     return _imageMap;
 }
 
+- (NSString *)imageName
+{
+    // 获取图像文件名
+    return [WXCondition imageMap][self.icon];
+}
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
     // 在这个方法里，dictionary 的 key 是 WXCondition 的属性名称，而 dictionary 的 value 是 JSON 的路径
@@ -57,18 +62,29 @@
              @"condition": @"weather.main",
              @"icon": @"weather.icon",
              @"windBearing": @"wind.deg",
-             @"windSpeed": @"wind.speed"
+             @"windSpeed": @"wind.speed",
              };
+}
+
+#define MPS_TO_MPH 2.23694f
+
+// OpenWeatherAPI 使用每秒/米的风速。由于 App 使用英制系统，需要将其转换为每小时/英里
++ (NSValueTransformer *)windSpeedJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSNumber *num) {
+        return @(num.floatValue*MPS_TO_MPH);
+    } reverseBlock:^(NSNumber *speed) {
+        return @(speed.floatValue/MPS_TO_MPH);
+    }];
 }
 
 + (NSValueTransformer *)dateJSONTransformer
 {
     // 使用 blocks 做属性的转换的工作，并返回一个 MTLValueTransformer 返回值
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSString *str) {
-                return [NSDate dateWithTimeIntervalSince1970:str.floatValue];
-            } reverseBlock:^(NSDate *date) {
-                return [NSString stringWithFormat:@"%f", [date timeIntervalSince1970]];
-            }];
+        return [NSDate dateWithTimeIntervalSince1970:str.floatValue];
+    } reverseBlock:^(NSDate *date) {
+        return [NSString stringWithFormat:@"%f",[date timeIntervalSince1970]];
+    }];
 }
 
 + (NSValueTransformer *)sunriseJSONTransformer
@@ -100,23 +116,8 @@
     return [self conditionDescriptionJSONTransformer];
 }
 
-#define MPS_TO_MPH 2.23694f
 
-// OpenWeatherAPI 使用每秒/米的风速。由于 App 使用英制系统，需要将其转换为每小时/英里
-+ (NSValueTransformer *)windSpeedJSONTransformer
-{
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^(NSNumber *num) {
-        return @(num.floatValue * MPS_TO_MPH);
-    } reverseBlock:^(NSNumber *speed) {
-        return @(speed.floatValue / MPS_TO_MPH);
-    }];
-}
 
-- (NSString *)imageName
-{
-    // 获取图像文件名
-    return [WXCondition imageMap][self.icon];
-}
 
 @end
 

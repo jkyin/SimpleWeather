@@ -23,7 +23,6 @@
     self = [super init];
     if (self) {
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-        
         _session = [NSURLSession sessionWithConfiguration:config];
     }
     return self;
@@ -37,22 +36,22 @@
     return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         // 创建一个 NSURLSessionDataTask（在iOS7中加入）从 URL 取数据
         NSURLSessionDataTask *dataTask = [self.session dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (!error) {
+            if (! error) {
                 NSError *jsonError = nil;
                 id json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
-                if (!jsonError) {
-                    // 当JSON数据存在并且没有错误，发送给订阅者序列化后的JSON数组或字典
+                if (! jsonError) {
+                    // 当 JSON 数据存在并且没有错误，发送给订阅者序列化后的 JSON 数组或字典
                     [subscriber sendNext:json];
                 }
                 else {
                     // 在任一情况下如果有一个错误，通知订阅者
-                    [subscriber sendNext:jsonError];
-                }
-            }
-            else {
+                    [subscriber sendError:jsonError];
+                } 
+            } 
+            else { 
                 // 在任一情况下如果有一个错误，通知订阅者
-                [subscriber sendNext:error];
-            }
+                [subscriber sendError:error]; 
+            } 
             
             // 无论该请求成功还是失败，通知订阅者请求已经完成
             [subscriber sendCompleted];
@@ -67,15 +66,14 @@
         }];
     }] doError:^(NSError *error) {
         // 增加了一个 “side effect”，以记录发生的任何错误。side effect 不订阅信号，相反，他们返回被连接到方法链的信号
-        NSLog(@"%@", error);
-    }];
+        NSLog(@"%@",error);
+    }]; 
 }
 
 - (RACSignal *)fetchCurrentConditionsForLocation:(CLLocationCoordinate2D)coordinate
 {
     // 使用 CLLocationCoordinate2D 对象的经纬度数据来格式化 URL
-    NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&units=imperial", coordinate.latitude, coordinate.longitude];
-    
+    NSString *urlString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=%f&lon=%f&units=imperial",coordinate.latitude, coordinate.longitude];
     NSURL *url = [NSURL URLWithString:urlString];
     
     return [[self fetchJSONFromURL:url] map:^(NSDictionary *json) {

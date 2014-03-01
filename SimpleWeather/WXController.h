@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 Yin. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface WXController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
