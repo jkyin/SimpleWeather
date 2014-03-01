@@ -46,6 +46,10 @@
 		2D9F8D1918C0B84F00ED9B39 /* weather-snow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9F8CFF18C0B84F00ED9B39 /* weather-snow@2x.png */; };
 		2D9F8D1A18C0B84F00ED9B39 /* weather-tstorm.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9F8D0018C0B84F00ED9B39 /* weather-tstorm.png */; };
 		2D9F8D1B18C0B84F00ED9B39 /* weather-tstorm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D9F8D0118C0B84F00ED9B39 /* weather-tstorm@2x.png */; };
+		2D9F8D1E18C0D59C00ED9B39 /* WXClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F8D1D18C0D59C00ED9B39 /* WXClient.m */; };
+		2D9F8D2118C0D5BA00ED9B39 /* WXManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F8D2018C0D5BA00ED9B39 /* WXManager.m */; };
+		2D9F8D2418C0D5CD00ED9B39 /* WXCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F8D2318C0D5CD00ED9B39 /* WXCondition.m */; };
+		2D9F8D2718C0D5E300ED9B39 /* WXDailyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F8D2618C0D5E300ED9B39 /* WXDailyForecast.m */; };
 		EB9D1F22D7424DF1A4882676 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EEE0FEECB284E2C8739FEBE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +110,14 @@
 		2D9F8CFF18C0B84F00ED9B39 /* weather-snow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather-snow@2x.png"; sourceTree = "<group>"; };
 		2D9F8D0018C0B84F00ED9B39 /* weather-tstorm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather-tstorm.png"; sourceTree = "<group>"; };
 		2D9F8D0118C0B84F00ED9B39 /* weather-tstorm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weather-tstorm@2x.png"; sourceTree = "<group>"; };
+		2D9F8D1C18C0D59C00ED9B39 /* WXClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXClient.h; sourceTree = "<group>"; };
+		2D9F8D1D18C0D59C00ED9B39 /* WXClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXClient.m; sourceTree = "<group>"; };
+		2D9F8D1F18C0D5BA00ED9B39 /* WXManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXManager.h; sourceTree = "<group>"; };
+		2D9F8D2018C0D5BA00ED9B39 /* WXManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXManager.m; sourceTree = "<group>"; };
+		2D9F8D2218C0D5CD00ED9B39 /* WXCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXCondition.h; sourceTree = "<group>"; };
+		2D9F8D2318C0D5CD00ED9B39 /* WXCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXCondition.m; sourceTree = "<group>"; };
+		2D9F8D2518C0D5E300ED9B39 /* WXDailyForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXDailyForecast.h; sourceTree = "<group>"; };
+		2D9F8D2618C0D5E300ED9B39 /* WXDailyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXDailyForecast.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +184,14 @@
 				2D17C01918C0AC700029C9D0 /* AppDelegate.m */,
 				2D9F8CE418C0B5AA00ED9B39 /* WXController.h */,
 				2D9F8CE518C0B5AA00ED9B39 /* WXController.m */,
+				2D9F8D1C18C0D59C00ED9B39 /* WXClient.h */,
+				2D9F8D1D18C0D59C00ED9B39 /* WXClient.m */,
+				2D9F8D1F18C0D5BA00ED9B39 /* WXManager.h */,
+				2D9F8D2018C0D5BA00ED9B39 /* WXManager.m */,
+				2D9F8D2218C0D5CD00ED9B39 /* WXCondition.h */,
+				2D9F8D2318C0D5CD00ED9B39 /* WXCondition.m */,
+				2D9F8D2518C0D5E300ED9B39 /* WXDailyForecast.h */,
+				2D9F8D2618C0D5E300ED9B39 /* WXDailyForecast.m */,
 				2D17C01B18C0AC700029C9D0 /* Images.xcassets */,
 				2D17C01018C0AC6F0029C9D0 /* Supporting Files */,
 			);
@@ -397,9 +417,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D9F8D2118C0D5BA00ED9B39 /* WXManager.m in Sources */,
+				2D9F8D2718C0D5E300ED9B39 /* WXDailyForecast.m in Sources */,
 				2D17C01A18C0AC700029C9D0 /* AppDelegate.m in Sources */,
 				2D17C01618C0AC6F0029C9D0 /* main.m in Sources */,
 				2D9F8CE618C0B5AA00ED9B39 /* WXController.m in Sources */,
+				2D9F8D2418C0D5CD00ED9B39 /* WXCondition.m in Sources */,
+				2D9F8D1E18C0D59C00ED9B39 /* WXClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
