@@ -15,6 +15,9 @@ LBBlurredImage
 TSMessages  
 [TSMessages](https://github.com/toursprung/TSMessages) 是另一个棒极了的轻巧开源库，用来显示浮层警告和通知。当出现错误信息的时候不会直接影响用户，最好通过浮层取代一个模态视图（例如 UIAlertView）这样做更有利于用户体验。
 
+ReactiveCocoa  
+这个也是由 Github 团队维护的一个库。[ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) 给 Objective-C 带来了函数编程。
+
 ![SimpleWeather](http://cdn2.raywenderlich.com/wp-content/uploads/2013/11/weather3.gif)
 
 
